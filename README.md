@@ -1,0 +1,2 @@
+# SMART-IRRIGATION-SYSTEM-USING-ARDUINO-UNO
+This project is an automated irrigation system which senses the moisture content of the soil and automatically pumps the water when motor is ON. A proper usage of irrigation system is very necessary because the main reason is the shortage of land reserved water due to lack of rain, spontaneous use of water as a result large amounts of water goes waste. This can be helpful to reduce water usage and can save your time.
