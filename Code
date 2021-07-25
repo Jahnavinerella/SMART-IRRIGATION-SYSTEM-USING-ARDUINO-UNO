@@ -1,43 +1,33 @@
-#include<LiquidCrystal.h>	
-LiquidCrystal lcd(2,3,4,5,6,7);         
-int sensor_pin=A0;          
-int output_value;	
-int limit=30; int digval=8;
-void setup()
-{ 
-pinMode(digval,OUTPUT);
-Serial.beigin(9600);
-Serial.println("Reading from the Sensor"); 
-delay(500); 
-lcd.begin(16,2); 
-lcd.setCursor(0,0); 
-lcd.print("Moisture :");
-} 
+int WATERPUMP = 13; 
+int sensor = 8; 
+int val;
+
+void setup() {
+  
+  pinMode(13,OUTPUT);
+  pinMode(8,INPUT); 
+  Serial.begin(9600); 
+  while (! Serial);
+  Serial.println("Speed 0 to 255");
+}
+
 void loop()
-{
-output_value=analogRead(sensor_pin); 
-Serial.println(output_value);	
-int moisture=(1000- output_value)/10; 
-lcd.setCursor(0,1); 
-lcd.print("Status:"); 
-lcd.setCursor(10,0); 
-lcd.print(moisture); 
-lcd.setCursor(12,0); 
-lcd.print("%"); 
-lcd.setCursor(15,0); 
-delay(1000); 
-if(moisture<50)
-{
-digitalWrite(digital,HIGH);
- lcd.setCursor(10,1); 
- lcd.print("ON "); 
- delay(1000);
-}
-else if(moistue>80)
-{ 
-digitalWrite(digital,LOW); 
-lcd.setCursor(10,1); 
-lcd.print("OFF "); 
-delay(1000);
-}
-}
+  { 
+  if (Serial.available())
+  {
+    int speed = Serial.parseInt(); 
+    if (speed >= 0 && speed <= 255)
+    {
+      analogWrite(WATERPUMP, speed);
+    }
+  }
+  val = digitalRead(8);  
+  if(val == LOW) 
+  {
+  digitalWrite(13,LOW); 
+  }
+  else
+  {
+  digitalWrite(13,HIGH); 
+  }
+  delay(400);
